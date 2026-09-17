@@ -14,12 +14,26 @@ public class Main {
             System.out.println("3 - Realizar Saque");
             System.out.println("4 - Sair");
             System.out.print("Escolha uma opcao: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Opcao invalida. Digite um numero de 1 a 4.");
+                scanner.next();
+                System.out.print("Escolha uma opcao: ");
+            }
+
             opcao = scanner.nextInt();
 
             if (opcao == 1) {
                 System.out.printf("Saldo atual: R$ %.2f%n", saldo);
             } else if (opcao == 2) {
                 System.out.print("Digite o valor do deposito: R$ ");
+
+                while (!scanner.hasNextDouble()) {
+                    System.out.println("Valor invalido. Digite um numero.");
+                    scanner.next();
+                    System.out.print("Digite o valor do deposito: R$ ");
+                }
+
                 double deposito = scanner.nextDouble();
 
                 if (deposito > 0) {
@@ -30,9 +44,18 @@ public class Main {
                 }
             } else if (opcao == 3) {
                 System.out.print("Digite o valor do saque: R$ ");
+
+                while (!scanner.hasNextDouble()) {
+                    System.out.println("Valor invalido. Digite um numero.");
+                    scanner.next();
+                    System.out.print("Digite o valor do saque: R$ ");
+                }
+
                 double saque = scanner.nextDouble();
 
-                if (saque > 0 && saque <= saldo) {
+                if (saque <= 0) {
+                    System.out.println("Valor invalido.");
+                } else if (saque <= saldo) {
                     saldo = saldo - saque;
                     System.out.printf("Saque realizado. Saldo atual: R$ %.2f%n", saldo);
                 } else {
